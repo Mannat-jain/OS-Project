@@ -1,0 +1,4 @@
+        self.process_tree.delete(*self.process_tree.get_children())  # Clear old data
+        processes = self.get_running_processes()
+        for cpu, pid, name in processes:
+            self.process_tree.insert("", "end", values=(pid, name, cpu))
