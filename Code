@@ -1,0 +1,87 @@
+import tkinter as tk
+from tkinter import ttk
+import threading
+import time
+import psutil
+import queue
+import matplotlib.pyplot as plt
+
+class ProcessMonitorApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Real-Time Process Synchronization Analyzer")
+        self.root.geometry("800x500")
+
+        # Process List Table
+        self.process_tree = ttk.Treeview(root, columns=("PID", "Name", "CPU Usage"), show="headings")
+        self.process_tree.heading("PID", text="PID")
+        self.process_tree.heading("Name", text="Process Name")
+        self.process_tree.heading("CPU Usage", text="CPU Usage (%)")
+        self.process_tree.pack(pady=10, fill="both", expand=True)
+
+        # Synchronization Table
+        self.sync_tree = ttk.Treeview(root, columns=("PID", "Name", "CPU Usage"), show="headings")
+        self.sync_tree.heading("PID", text="PID")
+        self.sync_tree.heading("Name", text="Process Name")
+        self.sync_tree.heading("CPU Usage", text="CPU Usage (%)")
+        self.sync_tree.pack(pady=10, fill="both", expand=True)
+
+        # Buttons
+        self.process_button = tk.Button(root, text="Show Processes", command=self.update_process_list)
+        self.process_button.pack(pady=5)
+
+        self.sync_button = tk.Button(root, text="Show Synchronization", command=self.show_synchronization)
+        self.sync_button.pack(pady=5)
+
+    def get_running_processes(self):
+        """Fetches running processes sorted by CPU usage."""
+        process_list = []
+        for process in psutil.process_iter(['pid', 'name', 'cpu_percent']):
+            try:
+                pid = process.info['pid']
+                name = process.info['name']
+                cpu_usage = process.info['cpu_percent']
+                process_list.append((cpu_usage, pid, name))
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                continue
+        return sorted(process_list, reverse=True, key=lambda x: x[0])
+
+    def update_process_list(self):
+        """Displays the current running processes in the Treeview."""
+        self.process_tree.delete(*self.process_tree.get_children())  # Clear old data
+        processes = self.get_running_processes()
+        for cpu, pid, name in processes:
+            self.process_tree.insert("", "end", values=(pid, name, cpu))
+
+    def show_synchronization(self):
+        """Displays process synchronization in both tabular and graphical formats."""
+        processes = self.get_running_processes()
+        process_queue = queue.PriorityQueue()
+
+        for cpu, pid, name in processes:
+            process_queue.put((-cpu, pid, name))  # Use negative CPU to prioritize high usage
+
+        execution_order = []
+        self.sync_tree.delete(*self.sync_tree.get_children())  # Clear previous sync data
+
+        while not process_queue.empty():
+            cpu, pid, name = process_queue.get()
+            execution_order.append((pid, name, -cpu))  # Store process execution order
+            self.sync_tree.insert("", "end", values=(pid, name, -cpu))  # Insert into sync table
+
+        # Plot Synchronization
+        fig, ax = plt.subplots()
+        pids = [proc[0] for proc in execution_order]
+        names = [proc[1] for proc in execution_order]
+        cpu_usages = [proc[2] for proc in execution_order]
+
+        ax.barh(names, cpu_usages, color='skyblue')
+        ax.set_xlabel("CPU Usage (%)")
+        ax.set_title("Process Synchronization Order")
+        plt.gca().invert_yaxis()  # Show highest CPU usage at the top
+        plt.show()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ProcessMonitorApp(root)
+    root.mainloop()
