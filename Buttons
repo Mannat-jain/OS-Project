@@ -1,0 +1,5 @@
+        self.process_button = tk.Button(root, text="Show Processes", command=self.update_process_list)
+        self.process_button.pack(pady=5)
+
+        self.sync_button = tk.Button(root, text="Show Synchronization", command=self.show_synchronization)
+        self.sync_button.pack(pady=5)
