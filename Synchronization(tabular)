@@ -1,0 +1,13 @@
+        processes = self.get_running_processes()
+        process_queue = queue.PriorityQueue()
+
+        for cpu, pid, name in processes:
+            process_queue.put((-cpu, pid, name))  # Use negative CPU to prioritize high usage
+
+        execution_order = []
+        self.sync_tree.delete(*self.sync_tree.get_children())  # Clear previous sync data
+
+        while not process_queue.empty():
+            cpu, pid, name = process_queue.get()
+            execution_order.append((pid, name, -cpu))  # Store process execution order
+            self.sync_tree.insert("", "end", values=(pid, name, -cpu))  # Insert into sync table
