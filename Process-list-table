@@ -1,0 +1,5 @@
+        self.process_tree = ttk.Treeview(root, columns=("PID", "Name", "CPU Usage"), show="headings")
+        self.process_tree.heading("PID", text="PID")
+        self.process_tree.heading("Name", text="Process Name")
+        self.process_tree.heading("CPU Usage", text="CPU Usage (%)")
+        self.process_tree.pack(pady=10, fill="both", expand=True)
