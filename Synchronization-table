@@ -1,0 +1,5 @@
+        self.sync_tree = ttk.Treeview(root, columns=("PID", "Name", "CPU Usage"), show="headings")
+        self.sync_tree.heading("PID", text="PID")
+        self.sync_tree.heading("Name", text="Process Name")
+        self.sync_tree.heading("CPU Usage", text="CPU Usage (%)")
+        self.sync_tree.pack(pady=10, fill="both", expand=True)

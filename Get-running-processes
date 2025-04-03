@@ -1,0 +1,10 @@
+        process_list = []
+        for process in psutil.process_iter(['pid', 'name', 'cpu_percent']):
+            try:
+                pid = process.info['pid']
+                name = process.info['name']
+                cpu_usage = process.info['cpu_percent']
+                process_list.append((cpu_usage, pid, name))
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                continue
+        return sorted(process_list, reverse=True, key=lambda x: x[0])

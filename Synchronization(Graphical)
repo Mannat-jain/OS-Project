@@ -1,0 +1,10 @@
+        fig, ax = plt.subplots()
+        pids = [proc[0] for proc in execution_order]
+        names = [proc[1] for proc in execution_order]
+        cpu_usages = [proc[2] for proc in execution_order]
+
+        ax.barh(names, cpu_usages, color='skyblue')
+        ax.set_xlabel("CPU Usage (%)")
+        ax.set_title("Process Synchronization Order")
+        plt.gca().invert_yaxis()  # Show highest CPU usage at the top
+        plt.show()
