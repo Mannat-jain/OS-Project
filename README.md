@@ -1,103 +1,101 @@
-# Real Time Process Synchronization Analysis
+## Real Time Process Synchronization Analysis
 
-1. Introduction
+# 1. Introduction
 
 Process synchronization is a fundamental concept in operating systems, ensuring that multiple processes execute in an orderly and efficient manner. The Real-Time Process Synchronization Analyzer is a tool designed to monitor and analyze process synchronization, helping to prevent race conditions and deadlocks. This project provides a user-friendly GUI-based system to visualize real-time process execution and synchronization.
 
-2. Features
+# 2. Features
 
-Real-time Process Monitoring
+- Real-time Process Monitoring
 
-Process Prioritization Based on CPU Usage
+- Process Prioritization Based on CPU Usage
 
-Graphical and Tabular Representation of Process Synchronization
+- Graphical and Tabular Representation of Process Synchronization
 
-Deadlock Detection and Analysis
+- Deadlock Detection and Analysis
 
-Process Communication Analysis
+- Process Communication Analysis
 
-Resource Allocation Visualization
+- Resource Allocation Visualization
 
-3. Technologies Used
+# 3. Technologies Used
 
-Python (Core Programming Language)
+- Python (Core Programming Language)
 
-Tkinter (GUI Development)
+- Tkinter (GUI Development)
 
-Psutil (Process Monitoring)
+- Psutil (Process Monitoring)
 
-Queue Module (Process Execution Management)
+- Queue Module (Process Execution Management)
 
-Matplotlib (Graphical Visualization)
+- Matplotlib (Graphical Visualization)
 
-Threading Module (Real-time Execution)
+- Threading Module (Real-time Execution)
 
-4. Usage
+# 4. Usage
 
-Ensure Python 3.x is installed along with dependencies: pip install psutil matplotlib
+- Ensure Python 3.x is installed along with dependencies: pip install psutil matplotlib
 
-Launch the application using python main.py.
+- Launch the application using python main.py.
 
-Click "Show Processes" to view currently running processes.
+- Click "Show Processes" to view currently running processes.
 
-Click "Analyze Synchronization" to visualize process execution order.
+- Click "Analyze Synchronization" to visualize process execution order.
 
-Monitor real-time CPU usage and process prioritization.
+- Monitor real-time CPU usage and process prioritization.
 
-View deadlock warnings and suggested resolutions.
+- View deadlock warnings and suggested resolutions.
 
-5. Dashboard Preview
+# 5. Dashboard Preview
 
 The Real-Time Process Synchronization Analyzer interface includes:
 
-A real-time process monitoring table.
+- A real-time process monitoring table.
 
-A priority-based synchronization table.
+- A priority-based synchronization table.
 
-Graphical charts displaying process execution order.
+- Graphical charts displaying process execution order.
 
-Buttons for process list retrieval and synchronization analysis.
+- Buttons for process list retrieval and synchronization analysis.
 
-Deadlock detection notifications.
+- Deadlock detection notifications.
 
-6. How It Works
+# 6. How It Works
 
-Uses psutil to fetch active processes in real-time.
+- Uses psutil to fetch active processes in real-time.
 
-Sorts processes based on CPU utilization to determine execution priority.
+- Sorts processes based on CPU utilization to determine execution priority.
 
-Displays process details in tabular format.
+- Displays process details in tabular format.
 
-Implements queue-based scheduling for synchronization visualization.
+- Implements queue-based scheduling for synchronization visualization.
 
-Provides graphical representation using matplotlib.
+- Provides graphical representation using matplotlib.
 
-Monitors for deadlocks and suggests resolution mechanisms.
+- Monitors for deadlocks and suggests resolution mechanisms.
 
-Updates the process list dynamically every few seconds.
+- Updates the process list dynamically every few seconds.
 
-Ensures smooth UI experience with efficient threading techniques.
+- Ensures smooth UI experience with efficient threading techniques.
 
-7. Future Enhancements
+# 7. Future Enhancements
 
-Introduce support for multi-threaded process synchronization testing.
+- Introduce support for multi-threaded process synchronization testing.
 
-Implement AI-based prediction models for deadlock detection.
+- Implement AI-based prediction models for deadlock detection.
 
-Enhance graphical insights with real-time animation.
+- Enhance graphical insights with real-time animation.
 
-Allow user-defined process scheduling policies.
+- Allow user-defined process scheduling policies.
 
-Improve resource allocation tracking with advanced logging mechanisms.
+- Improve resource allocation tracking with advanced logging mechanisms.
 
-8. Acknowledgments
+# 8. Acknowledgments
 
-Thanks to the Python and Tkinter communities for GUI development resources.
+- Thanks to the Python and Tkinter communities for GUI development resources.
 
-Special appreciation to the Psutil library for process management capabilities.
+- Special appreciation to the Psutil library for process management capabilities.
 
-Matplotlib for enhancing process synchronization visualization.
+- Matplotlib for enhancing process synchronization visualization.
 
-Contributors and open-source communities for making this project possible.
-
-
+- Contributors and open-source communities for making this project possible.
